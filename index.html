@@ -2,81 +2,664 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>COMSATS SUN</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMSATS University Islamabad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
 
-    <!-- CSS will be linked later -->
-    <link rel="stylesheet" href="css/style.css">
+        body {
+            background-color: #f5f5f5;
+        }
+
+        /* Header Styles */
+        .top-header {
+            background-color: #003366;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .top-header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links i:hover {
+            color: #ffcc00;
+        }
+
+        .main-header {
+            background-color: #003366; /* Changed to footer color */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            height: 70px;
+        }
+
+        .logo-text h1 {
+            color: white; /* Changed to white */
+            font-size: 24px;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            color: #ffcc00; /* Changed to yellow for contrast */
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: white; /* Changed to white */
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #ffcc00; /* Changed to yellow for hover effect */
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: white; /* Changed to white */
+            cursor: pointer;
+        }
+
+        /* Slider Styles */
+        .slider-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 400px;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 51, 102, 0.85);
+            color: white;
+            padding: 20px;
+        }
+
+        .slide-content h2 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .slide-content p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 15px;
+        }
+
+        .slider-controls button {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            color: #003366;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-controls button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .slider-dots .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .slider-dots .dot.active {
+            background: white;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #003366;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .footer-top {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #cc0000;
+            color: #ffcc00;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffcc00;
+        }
+
+        .contact-details li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .contact-details i {
+            color: #ffcc00;
+            margin-top: 3px;
+        }
+
+        .social-footer {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-footer a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .social-footer a:hover {
+            background: #cc0000;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            background-color: #002244;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .copyright {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-menu {
+                gap: 15px;
+            }
+            
+            .slide-content h2 {
+                font-size: 18px;
+            }
+            
+            .slide-content p {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-header {
+                font-size: 12px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .social-links {
+                gap: 10px;
+            }
+            
+            .main-header-container {
+                flex-wrap: wrap;
+            }
+            
+            .logo-text h1 {
+                font-size: 20px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                margin-top: 20px;
+                background-color: #003366;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                width: 100%;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-menu a {
+                display: block;
+                padding: 12px 0;
+            }
+            
+            .slider {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+            }
+            
+            .logo {
+                height: 60px;
+            }
+            
+            .slider {
+                height: 250px;
+            }
+            
+            .slide-content {
+                padding: 15px;
+            }
+            
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <!-- ================= HEADER ================= -->
-    <header class="main-header">
-
-        <!-- Left Side: Social Icons -->
-        <div class="header-left">
-            <a href="#">
-                <img src="images/facebook.png" alt="Facebook">
-            </a>
-            <a href="#">
-                <img src="images/twitter.png" alt="Twitter">
-            </a>
-            <a href="#">
-                <img src="images/linkedin.png" alt="LinkedIn">
-            </a>
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="top-header-container">
+            <div class="contact-info">
+                <div class="phone">
+                    <!-- <i class="fas fa-phone"></i> -->
+                    <!-- <span>+92 51 111 001 007</span> -->
+                </div>
+                <div class="email">
+                    <!-- <i class="fas fa-envelope"></i> -->
+                    <!-- <span>admissions@comsats.edu.pk</span> -->
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
         </div>
-
-        <!-- Center: Navigation Links -->
-        <nav class="header-center">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Departments</a>
-            <a href="#">Admissions</a>
-            <a href="#">Contact</a>
-        </nav>
-
-        <!-- Right Side: Logo and Site Name -->
-        <div class="header-right">
-            <img src="images/logo.webp" alt="COMSATS Logo">
-            <span>COMSATS SUN</span>
-        </div>
-
     </header>
-    <!-- =============== HEADER END =============== -->
 
-
-    <!-- ================= SLIDER ================= -->
-    <!-- Slider will be built using array + JS later -->
-    <section class="slider">
-
-        <div class="slider-container">
-            <img src="images/slide1.jpg" alt="Slide 1">
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="main-header-container">
+            <div class="logo-container">
+                <img src="images/comLogo.png" alt="COMSATS Logo" class="logo">
+                <div class="logo-text">
+                    <h1>COMSATS University <span>Islamabad</span></h1>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Admissions</a></li>
+                <li><a href="#">Academics</a></li>
+                <li><a href="#">Research</a></li>
+                <li><a href="#">Campuses</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="student.html">Student</a></li>
+            </ul>
         </div>
+    </header>
 
-        <button class="prev-btn">Previous</button>
-        <button class="next-btn">Next</button>
-
+    <!-- Slider Section -->
+    <section class="slider-container">
+        <div class="slider" id="slider">
+            <!-- Slide 1 -->
+            <div class="slide">
+                <img src="images/comsats1.jpg" alt="COMSATS University Campus">
+                <div class="slide-content">
+                    <h2>Excellence in Education & Research</h2>
+                    <p>COMSATS University Islamabad is a public sector university dedicated to providing quality education and research opportunities.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide">
+                <img src="images/comsats2.jpg" alt="COMSATS University Facilities">
+                <div class="slide-content">
+                    <h2>State-of-the-Art Facilities</h2>
+                    <p>Modern laboratories, libraries, and research centers equipped with the latest technology to support academic excellence.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide">
+                <img src="images/comsats3.jpg" alt="COMSATS University Students">
+                <div class="slide-content">
+                    <h2>Vibrant Campus Life</h2>
+                    <p>A diverse community of students from across Pakistan engaged in academic, cultural, and sports activities.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <button id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="slider-dots" id="sliderDots">
+            <!-- Dots will be generated by JavaScript -->
+        </div>
     </section>
-    <!-- =============== SLIDER END =============== -->
 
-
-    <!-- ================= FOOTER ================= -->
-    <footer class="main-footer">
-
-        <div class="footer-content">
-            <h3>COMSATS SUN</h3>
-            <p>COMSATS University Portal for Students and Faculty</p>
-
-            <p>Email: info@comsatssun.edu.pk</p>
-            <p>Phone: +92 300 0000000</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Admissions</a></li>
+                    <li><a href="#">Academics</a></li>
+                    <li><a href="#">Research</a></li>
+                    <li><a href="#">Campuses</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Important Links</h3>
+                <ul>
+                    <li><a href="#">Student Portal</a></li>
+                    <li><a href="#">Faculty Portal</a></li>
+                    <li><a href="#">Alumni Portal</a></li>
+                    <li><a href="#">Online Admissions</a></li>
+                    <li><a href="#">Examination System</a></li>
+                    <li><a href="#">Library</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul class="contact-details">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Park Road, Tarlai Kalan, Islamabad 45550, Pakistan</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>+92 51 111 001 007</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>admissions@comsats.edu.pk</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-globe"></i>
+                        <span>www.comsats.edu.pk</span>
+                    </li>
+                </ul>
+                <div class="social-footer">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
         </div>
-
         <div class="footer-bottom">
-            <p>© 2025 COMSATS SUN. All Rights Reserved.</p>
+            <div class="copyright">
+                <p>&copy; 2023 COMSATS University Islamabad. All Rights Reserved.</p>
+            </div>
         </div>
-
     </footer>
-    <!-- =============== FOOTER END =============== -->
 
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Slider Functionality
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const sliderDots = document.getElementById('sliderDots');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            sliderDots.appendChild(dot);
+        }
+        
+        const dots = document.querySelectorAll('.dot');
+        
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update active dot
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+        
+        // Auto slide every 5 seconds
+        let slideInterval = setInterval(nextSlide, 5000);
+        
+        // Reset interval when user interacts with slider
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+        
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetInterval();
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetInterval();
+        });
+        
+        // Pause auto-slide on hover
+        const sliderContainer = document.querySelector('.slider-container');
+        sliderContainer.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        sliderContainer.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+        
+        // Responsive menu close on link click
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
