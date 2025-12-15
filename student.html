@@ -155,46 +155,44 @@
         });
 
         // Form Submission
-        studentForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validate all fields
-            const isNameValid = validateName();
-            const isEmailValid = validateEmail();
-            const isRollValid = validateRollNumber();
-            
-            if (isNameValid && isEmailValid && isRollValid) {
-                // In a real application, you would send data to server here
-                // For demo purposes, we'll just show success message
-                
-                // Show success message
+// Form Submission
+studentForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Validate all fields
+    const isNameValid = validateName();
+    const isEmailValid = validateEmail();
+    const isRollValid = validateRollNumber();
+    
+    if (isNameValid && isEmailValid && isRollValid) {
+        // Prepare form data
+        const formData = new FormData(studentForm);
+
+        // Send data to PHP
+        fetch('save_student.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            data = data.trim();
+            if (data === "success") {
                 successMessage.classList.add('show');
-                
-                // Scroll to success message
-                successMessage.scrollIntoView({ behavior: 'smooth' });
-                
-                // Log form data to console (for demo)
-                console.log('Form submitted successfully!');
-                console.log('Student Name:', studentName.value);
-                console.log('Student Email:', studentEmail.value);
-                console.log('Roll Number:', rollNumber.value);
-                
-                // Reset form after 3 seconds (optional)
-                setTimeout(() => {
-                    studentForm.reset();
-                    successMessage.classList.remove('show');
-                }, 5000);
+                studentForm.reset();
+                setTimeout(() => successMessage.classList.remove('show'), 5000);
             } else {
-                // Scroll to first error
-                if (!isNameValid) {
-                    studentName.focus();
-                } else if (!isEmailValid) {
-                    studentEmail.focus();
-                } else {
-                    rollNumber.focus();
-                }
+                alert(data); // Show PHP error if any
             }
-        });
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+        // Scroll to first error
+        if (!isNameValid) studentName.focus();
+        else if (!isEmailValid) studentEmail.focus();
+        else rollNumber.focus();
+    }
+});
+
 
         // Reset form event
         studentForm.addEventListener('reset', function() {
