@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMSATS University Islamabad - Student Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        .form-header {
+            background-color: #003366;
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+
+        .form-header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .form-header h1 span {
+            color: #ffcc00;
+        }
+
+        .form-header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .form-header .logo {
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        /* Form Styles */
+        .student-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #003366;
+            font-size: 16px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #003366;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+        }
+
+        .form-group input.error {
+            border-color: #cc0000;
+        }
+
+        .error-message {
+            color: #cc0000;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Button Styles */
+        .form-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-submit {
+            background-color: #003366;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-submit:hover {
+            background-color: #002244;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-reset {
+            background-color: #cc0000;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-reset:hover {
+            background-color: #a30000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-clear {
+            background-color: #666;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-clear:hover {
+            background-color: #555;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Success Message */
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #c3e6cb;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Form Instructions */
+        .form-instructions {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            border-left: 4px solid #003366;
+        }
+
+        .form-instructions h3 {
+            color: #003366;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .form-instructions ul {
+            padding-left: 20px;
+            color: #555;
+        }
+
+        .form-instructions li {
+            margin-bottom: 5px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+            }
+            
+            .form-header {
+                padding: 20px;
+            }
+            
+            .form-header h1 {
+                font-size: 24px;
+            }
+            
+            .student-form {
+                padding: 20px;
+            }
+            
+            .form-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-header h1 {
+                font-size: 22px;
+            }
+            
+            .form-header .logo {
+                height: 50px;
+            }
+            
+            .form-group input {
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Form Header -->
+        <div class="form-header">
+            <img src="images/comLogo.png" alt="COMSATS Logo" class="logo">
+            <h1>COMSATS University <span>Islamabad</span></h1>
+            <p>Student Registration Form</p>
+        </div>
+
+        <!-- Form Instructions -->
+        <div class="form-instructions">
+            <h3><i class="fas fa-info-circle"></i> Instructions</h3>
+            <ul>
+                <li>Please fill out all fields marked with required information</li>
+                <li>Use your official university email address</li>
+                <li>Roll number should follow the university format (e.g., SP19-BSE-001)</li>
+                <li>After submission, you will receive a confirmation email</li>
+            </ul>
+        </div>
+
+        <!-- Student Form -->
+        <form class="student-form" id="studentForm">
+            <!-- Student Name -->
+            <div class="form-group">
+                <label for="studentName">
+                    <i class="fas fa-user"></i> Student Name *
+                </label>
+                <input type="text" id="studentName" name="studentName" placeholder="Enter your full name" required>
+                <div class="error-message" id="nameError">Please enter a valid name (minimum 3 characters)</div>
+            </div>
+
+            <!-- Student Email -->
+            <div class="form-group">
+                <label for="studentEmail">
+                    <i class="fas fa-envelope"></i> Student Email *
+                </label>
+                <input type="email" id="studentEmail" name="studentEmail" placeholder="example@comsats.edu.pk" required>
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+            </div>
+
+            <!-- Student Roll Number -->
+            <div class="form-group">
+                <label for="rollNumber">
+                    <i class="fas fa-id-card"></i> Student Roll Number *
+                </label>
+                <input type="text" id="rollNumber" name="rollNumber" placeholder="e.g., SP19-BSE-001" required>
+                <div class="error-message" id="rollError">Please enter a valid roll number</div>
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i> 
+                <strong>Registration Successful!</strong> Your information has been submitted successfully.
+            </div>
+
+            <!-- Form Buttons -->
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-submit">
+                    <i class="fas fa-paper-plane"></i> Submit
+                </button>
+                <button type="reset" class="btn btn-reset">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+                <button type="button" class="btn btn-clear" id="clearBtn">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Form Elements
+        const studentForm = document.getElementById('studentForm');
+        const studentName = document.getElementById('studentName');
+        const studentEmail = document.getElementById('studentEmail');
+        const rollNumber = document.getElementById('rollNumber');
+        const clearBtn = document.getElementById('clearBtn');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Error Elements
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const rollError = document.getElementById('rollError');
+
+        // Validation Functions
+        function validateName() {
+            const name = studentName.value.trim();
+            if (name.length < 3) {
+                studentName.classList.add('error');
+                nameError.style.display = 'block';
+                return false;
+            }
+            studentName.classList.remove('error');
+            nameError.style.display = 'none';
+            return true;
+        }
+
+        function validateEmail() {
+            const email = studentEmail.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailPattern.test(email)) {
+                studentEmail.classList.add('error');
+                emailError.style.display = 'block';
+                return false;
+            }
+            studentEmail.classList.remove('error');
+            emailError.style.display = 'none';
+            return true;
+        }
+
+        function validateRollNumber() {
+            const roll = rollNumber.value.trim();
+            // Basic roll number validation (can be customized based on actual format)
+            if (roll.length < 5) {
+                rollNumber.classList.add('error');
+                rollError.style.display = 'block';
+                return false;
+            }
+            rollNumber.classList.remove('error');
+            rollError.style.display = 'none';
+            return true;
+        }
+
+        // Event Listeners for Real-time Validation
+        studentName.addEventListener('blur', validateName);
+        studentEmail.addEventListener('blur', validateEmail);
+        rollNumber.addEventListener('blur', validateRollNumber);
+
+        // Clear All Button
+        clearBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to clear all fields?')) {
+                studentForm.reset();
+                // Clear error states
+                studentName.classList.remove('error');
+                studentEmail.classList.remove('error');
+                rollNumber.classList.remove('error');
+                nameError.style.display = 'none';
+                emailError.style.display = 'none';
+                rollError.style.display = 'none';
+                successMessage.classList.remove('show');
+            }
+        });
+
+        // Form Submission
+        studentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate all fields
+            const isNameValid = validateName();
+            const isEmailValid = validateEmail();
+            const isRollValid = validateRollNumber();
+            
+            if (isNameValid && isEmailValid && isRollValid) {
+                // In a real application, you would send data to server here
+                // For demo purposes, we'll just show success message
+                
+                // Show success message
+                successMessage.classList.add('show');
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Log form data to console (for demo)
+                console.log('Form submitted successfully!');
+                console.log('Student Name:', studentName.value);
+                console.log('Student Email:', studentEmail.value);
+                console.log('Roll Number:', rollNumber.value);
+                
+                // Reset form after 3 seconds (optional)
+                setTimeout(() => {
+                    studentForm.reset();
+                    successMessage.classList.remove('show');
+                }, 5000);
+            } else {
+                // Scroll to first error
+                if (!isNameValid) {
+                    studentName.focus();
+                } else if (!isEmailValid) {
+                    studentEmail.focus();
+                } else {
+                    rollNumber.focus();
+                }
+            }
+        });
+
+        // Reset form event
+        studentForm.addEventListener('reset', function() {
+            // Clear error states on reset
+            studentName.classList.remove('error');
+            studentEmail.classList.remove('error');
+            rollNumber.classList.remove('error');
+            nameError.style.display = 'none';
+            emailError.style.display = 'none';
+            rollError.style.display = 'none';
+            successMessage.classList.remove('show');
+        });
+    </script>
+</body>
+</html>
